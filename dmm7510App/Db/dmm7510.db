@@ -3607,253 +3607,253 @@ record(calcout, "$(P)$(R)DigtzBuff2Calc"){
   field(OUT, "@dmm7510.proto trace_digtz_set($(P)$(R),2) $(PORT)")
 }
 
-########################################################################
-# Calibration
-# Desc: Temperature information and autocalibration.
-
-record(longin, "$(P)$(R)ACalCnt-Mon"){
-  field(DESC, "Num. of times autocal. has been run")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto acal_count_get $(PORT)")
-}
-
-record(ai, "$(P)$(R)ACalDiff-Mon"){
-  field(DESC, "Internal and last autocal. temp. diff.")
-  field(EGU, "DegC")
-  field(PREC, "2")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto acal_diff_get $(PORT)")
-  field(FLNK, "$(P)$(R)ACalWarn-Mon")
-}
-
-record(bo, "$(P)$(R)ACalRst-Cmd"){
-  field(DESC, "Autocal. reset temp. warning")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)ACalWarn-Mon")
-}
-
-record(calc, "$(P)$(R)ACalWarn-Mon"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration needed flag")
-  field(INPA, "$(P)$(R)ACalDiff-Mon.VAL")
-  field(INPB, "$(P)$(R)ACalLim-SP.VAL")
-  field(INPC, "$(P)$(R)ACalRst-Cmd.VAL")
-  field(CALC, "(C=0&&(A>=B||A<=-B||VAL=1))?1:0")
-}
-
-# The dmm7510 manual recommends maximum variation of 5 degrees Celsius
-record(ao, "$(P)$(R)ACalLim-SP"){
-  field(DESC, "Max temperature variation accepted")
-  field(EGU, "DegC")
-  field(VAL, "5")
-  field(PREC, "2")
-}
-
-record(stringin, "$(P)$(R)ACalLast-Mon"){
-  field(DESC, "Last autocalibration time")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto acal_last_get $(PORT)")
-}
-
-record(stringin, "$(P)$(R)ACalNext-Mon"){
-  field(DESC, "Next autocalibration time")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto acal_next_get $(PORT)")
-}
-
-record(bo, "$(P)$(R)ACalRev-Cmd"){
-  field(DESC, "Return previous calibration values cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)ACalRevCalc")
-}
-
-record(calcout, "$(P)$(R)ACalRevCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Return previous calibration values calc")
-  field(INPA, "$(P)$(R)ACalRev-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_rev_set $(PORT)")
-}
-
-record(bo, "$(P)$(R)ACalStart-Cmd"){
-  field(DESC, "Start autocalibration cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)ACalStartCalc")
-}
-
-record(calcout, "$(P)$(R)ACalStartCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Start autocalibration calc")
-  field(INPA, "$(P)$(R)ACalStart-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_start_set $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)ACalSchAct-Sel"){
-  field(DESC, "Schedule autocalibration action")
-  field(ZRST, "NONE")
-  field(ONST, "Run")
-  field(TWST, "Notify")
-  field(FLNK, "$(P)$(R)ACalSchCalc1")
-}
-
-record(mbbi, "$(P)$(R)ACalSchAct-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Schedule autocalibration action Sts")
-  field(ZRST, "NONE")
-  field(ONST, "Run")
-  field(TWST, "Notify")
-}
-
-record(mbbo, "$(P)$(R)ACalSchInt-Sel"){
-  field(DESC, "Schedule autocalibration interval")
-  field(ZRST, "8 hours")
-  field(ONST, "16 hours")
-  field(TWST, "1 day")
-  field(THST, "7 days")
-  field(FRST, "14 days")
-  field(FVST, "30 days")
-  field(SXST, "90 days")
-  field(FLNK, "$(P)$(R)ACalSchCalc2")
-}
-
-record(mbbi, "$(P)$(R)ACalSchInt-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Schedule autocalibration interval Sts")
-  field(ZRST, "8 hours")
-  field(ONST, "16 hours")
-  field(TWST, "1 day")
-  field(THST, "7 days")
-  field(FRST, "14 days")
-  field(FVST, "30 days")
-  field(SXST, "90 days")
-}
-
-record(longout, "$(P)$(R)ACalSchHr-SP"){
-  field(DESC, "Schedule autocalibration hour")
-  field(DRVH, "23")
-  field(DRVL, "0")
-  field(EGU, "hours")
-  field(FLNK, "$(P)$(R)ACalSchCalc3")
-}
-
-record(longin, "$(P)$(R)ACalSchHr-RB"){
-  field(ASG, "Reserved")
-  field(EGU, "hours")
-  field(DESC, "Schedule autocalibration hour RB")
-}
-
-record(calcout, "$(P)$(R)ACalSchCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule calc1")
-  field(INPA, "$(P)$(R)ACalSchAct-Sel.VAL")
-  field(INPB, "$(P)$(R)ACalSchInt-Sts.VAL")
-  field(CALC, "(A=0||B<2)?5:3")
-  field(OUT, "$(P)$(R)ACalSchRes PP")
-}
-
-record(calcout, "$(P)$(R)ACalSchCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule calc2")
-  field(INPA, "$(P)$(R)ACalSchAct-Sts.VAL")
-  field(INPB, "$(P)$(R)ACalSchInt-Sel.VAL")
-  field(CALC, "A=0?0:(B<2?4:2)")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)ACalSchRes PP")
-}
-
-record(calcout, "$(P)$(R)ACalSchCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule calc3")
-  field(INPA, "$(P)$(R)ACalSchAct-Sts.VAL")
-  field(INPB, "$(P)$(R)ACalSchInt-Sts.VAL")
-  field(CALC, "(A=0||B<2)?0:1")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)ACalSchRes PP")
-}
-
-record(longin, "$(P)$(R)ACalSchRes"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration calc result")
-  field(FLNK, "$(P)$(R)ACalSchFout")
-}
-
-record(fanout, "$(P)$(R)ACalSchFout"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule fanout")
-  field(SELM, "Specified")
-  field(SELL, "$(P)$(R)ACalSchRes.VAL")
-  field(LNK1, "$(P)$(R)ACalSchOut1")
-  field(LNK2, "$(P)$(R)ACalSchOut2")
-  field(LNK3, "$(P)$(R)ACalSchOut3")
-  field(LNK4, "$(P)$(R)ACalSchOut4")
-  field(LNK5, "$(P)$(R)ACalSchOut5")
-}
-
-# Protocol for the complete schedule to set hour
-record(bo, "$(P)$(R)ACalSchOut1"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule out 1")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_set1($(P)$(R)) $(PORT)")
-  field(FLNK, "$(P)$(R)ACalSchRead")
-}
-
-# Protocol for the complete schedule to set interval
-record(bo, "$(P)$(R)ACalSchOut2"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule out 2")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_set2($(P)$(R)) $(PORT)")
-  field(FLNK, "$(P)$(R)ACalSchRead")
-}
-
-# Protocol for the complete schedule to set action
-record(bo, "$(P)$(R)ACalSchOut3"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule out 3")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_set4($(P)$(R)) $(PORT)")
-  field(FLNK, "$(P)$(R)ACalSchRead")
-}
-
-# Protocol to set interval for interval smaller than 1 day
-record(bo, "$(P)$(R)ACalSchOut4"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule out 4")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_set4($(P)$(R)) $(PORT)")
-  field(FLNK, "$(P)$(R)ACalSchRead")
-}
-
-# Protocol to set action for schedule interval smaller than 1 day
-record(bo, "$(P)$(R)ACalSchOut5"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule out 5")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_set5($(P)$(R)) $(PORT)")
-  field(FLNK, "$(P)$(R)ACalSchRead")
-}
-
-# StreamDevice redirects values to corresponding RB records
-record(calcout, "$(P)$(R)ACalSchRead"){
-  field(ASG, "Reserved")
-  field(DESC, "Autocalibration schedule read")
-  field(ODLY, "2")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto acal_sch_get($(P)$(R)) $(PORT)")
-}
-
+#########################################################################
+## Calibration
+## Desc: Temperature information and autocalibration.
+#
+#record(longin, "$(P)$(R)ACalCnt-Mon"){
+#  field(DESC, "Num. of times autocal. has been run")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto acal_count_get $(PORT)")
+#}
+#
+#record(ai, "$(P)$(R)ACalDiff-Mon"){
+#  field(DESC, "Internal and last autocal. temp. diff.")
+#  field(EGU, "DegC")
+#  field(PREC, "2")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto acal_diff_get $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalWarn-Mon")
+#}
+#
+#record(bo, "$(P)$(R)ACalRst-Cmd"){
+#  field(DESC, "Autocal. reset temp. warning")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)ACalWarn-Mon")
+#}
+#
+#record(calc, "$(P)$(R)ACalWarn-Mon"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration needed flag")
+#  field(INPA, "$(P)$(R)ACalDiff-Mon.VAL")
+#  field(INPB, "$(P)$(R)ACalLim-SP.VAL")
+#  field(INPC, "$(P)$(R)ACalRst-Cmd.VAL")
+#  field(CALC, "(C=0&&(A>=B||A<=-B||VAL=1))?1:0")
+#}
+#
+## The dmm7510 manual recommends maximum variation of 5 degrees Celsius
+#record(ao, "$(P)$(R)ACalLim-SP"){
+#  field(DESC, "Max temperature variation accepted")
+#  field(EGU, "DegC")
+#  field(VAL, "5")
+#  field(PREC, "2")
+#}
+#
+#record(stringin, "$(P)$(R)ACalLast-Mon"){
+#  field(DESC, "Last autocalibration time")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto acal_last_get $(PORT)")
+#}
+#
+#record(stringin, "$(P)$(R)ACalNext-Mon"){
+#  field(DESC, "Next autocalibration time")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto acal_next_get $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)ACalRev-Cmd"){
+#  field(DESC, "Return previous calibration values cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)ACalRevCalc")
+#}
+#
+#record(calcout, "$(P)$(R)ACalRevCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Return previous calibration values calc")
+#  field(INPA, "$(P)$(R)ACalRev-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_rev_set $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)ACalStart-Cmd"){
+#  field(DESC, "Start autocalibration cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)ACalStartCalc")
+#}
+#
+#record(calcout, "$(P)$(R)ACalStartCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Start autocalibration calc")
+#  field(INPA, "$(P)$(R)ACalStart-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_start_set $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)ACalSchAct-Sel"){
+#  field(DESC, "Schedule autocalibration action")
+#  field(ZRST, "NONE")
+#  field(ONST, "Run")
+#  field(TWST, "Notify")
+#  field(FLNK, "$(P)$(R)ACalSchCalc1")
+#}
+#
+#record(mbbi, "$(P)$(R)ACalSchAct-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Schedule autocalibration action Sts")
+#  field(ZRST, "NONE")
+#  field(ONST, "Run")
+#  field(TWST, "Notify")
+#}
+#
+#record(mbbo, "$(P)$(R)ACalSchInt-Sel"){
+#  field(DESC, "Schedule autocalibration interval")
+#  field(ZRST, "8 hours")
+#  field(ONST, "16 hours")
+#  field(TWST, "1 day")
+#  field(THST, "7 days")
+#  field(FRST, "14 days")
+#  field(FVST, "30 days")
+#  field(SXST, "90 days")
+#  field(FLNK, "$(P)$(R)ACalSchCalc2")
+#}
+#
+#record(mbbi, "$(P)$(R)ACalSchInt-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Schedule autocalibration interval Sts")
+#  field(ZRST, "8 hours")
+#  field(ONST, "16 hours")
+#  field(TWST, "1 day")
+#  field(THST, "7 days")
+#  field(FRST, "14 days")
+#  field(FVST, "30 days")
+#  field(SXST, "90 days")
+#}
+#
+#record(longout, "$(P)$(R)ACalSchHr-SP"){
+#  field(DESC, "Schedule autocalibration hour")
+#  field(DRVH, "23")
+#  field(DRVL, "0")
+#  field(EGU, "hours")
+#  field(FLNK, "$(P)$(R)ACalSchCalc3")
+#}
+#
+#record(longin, "$(P)$(R)ACalSchHr-RB"){
+#  field(ASG, "Reserved")
+#  field(EGU, "hours")
+#  field(DESC, "Schedule autocalibration hour RB")
+#}
+#
+#record(calcout, "$(P)$(R)ACalSchCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule calc1")
+#  field(INPA, "$(P)$(R)ACalSchAct-Sel.VAL")
+#  field(INPB, "$(P)$(R)ACalSchInt-Sts.VAL")
+#  field(CALC, "(A=0||B<2)?5:3")
+#  field(OUT, "$(P)$(R)ACalSchRes PP")
+#}
+#
+#record(calcout, "$(P)$(R)ACalSchCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule calc2")
+#  field(INPA, "$(P)$(R)ACalSchAct-Sts.VAL")
+#  field(INPB, "$(P)$(R)ACalSchInt-Sel.VAL")
+#  field(CALC, "A=0?0:(B<2?4:2)")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)ACalSchRes PP")
+#}
+#
+#record(calcout, "$(P)$(R)ACalSchCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule calc3")
+#  field(INPA, "$(P)$(R)ACalSchAct-Sts.VAL")
+#  field(INPB, "$(P)$(R)ACalSchInt-Sts.VAL")
+#  field(CALC, "(A=0||B<2)?0:1")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)ACalSchRes PP")
+#}
+#
+#record(longin, "$(P)$(R)ACalSchRes"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration calc result")
+#  field(FLNK, "$(P)$(R)ACalSchFout")
+#}
+#
+#record(fanout, "$(P)$(R)ACalSchFout"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule fanout")
+#  field(SELM, "Specified")
+#  field(SELL, "$(P)$(R)ACalSchRes.VAL")
+#  field(LNK1, "$(P)$(R)ACalSchOut1")
+#  field(LNK2, "$(P)$(R)ACalSchOut2")
+#  field(LNK3, "$(P)$(R)ACalSchOut3")
+#  field(LNK4, "$(P)$(R)ACalSchOut4")
+#  field(LNK5, "$(P)$(R)ACalSchOut5")
+#}
+#
+## Protocol for the complete schedule to set hour
+#record(bo, "$(P)$(R)ACalSchOut1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule out 1")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_set1($(P)$(R)) $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalSchRead")
+#}
+#
+## Protocol for the complete schedule to set interval
+#record(bo, "$(P)$(R)ACalSchOut2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule out 2")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_set2($(P)$(R)) $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalSchRead")
+#}
+#
+## Protocol for the complete schedule to set action
+#record(bo, "$(P)$(R)ACalSchOut3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule out 3")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_set4($(P)$(R)) $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalSchRead")
+#}
+#
+## Protocol to set interval for interval smaller than 1 day
+#record(bo, "$(P)$(R)ACalSchOut4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule out 4")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_set4($(P)$(R)) $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalSchRead")
+#}
+#
+## Protocol to set action for schedule interval smaller than 1 day
+#record(bo, "$(P)$(R)ACalSchOut5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule out 5")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_set5($(P)$(R)) $(PORT)")
+#  field(FLNK, "$(P)$(R)ACalSchRead")
+#}
+#
+## StreamDevice redirects values to corresponding RB records
+#record(calcout, "$(P)$(R)ACalSchRead"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Autocalibration schedule read")
+#  field(ODLY, "2")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto acal_sch_get($(P)$(R)) $(PORT)")
+#}
+#
 ########################################################################
 # Blender
 # Desc: Combines trigger events with OR/AND logic.
