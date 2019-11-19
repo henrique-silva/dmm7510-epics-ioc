@@ -1,158 +1,158 @@
-########################################################################
-# External I/O
-# Desc: External trigger input and output.
-
-# Input
-record(bo, "$(P)$(R)ClearExInEv-Cmd"){
-  field(DESC, "Clear External Input trigger event")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)ClearExInEvCalc")
-}
-
-record(calcout, "$(P)$(R)ClearExInEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Clear External Input trigger event calc")
-  field(INPA, "$(P)$(R)ClearExInEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto exin_clear_set $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)ExInEdge-Sel"){
-  field(DESC, "External Input edge type")
-  field(ZRST, "FALLING")
-  field(ONST, "RISING")
-  field(TWST, "EITHER")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto exin_edge_set $(PORT)")
-  field(FLNK, "$(P)$(R)ExInEdge-Sts")
-}
-
-record(mbbi, "$(P)$(R)ExInEdge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "External Input edge type Sts")
-  field(ZRST, "FALLING")
-  field(ONST, "RISING")
-  field(TWST, "EITHER")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto exin_edge_get $(PORT)")
-}
-
-record(bi, "$(P)$(R)ExInOver-Mon"){
-  field(DESC, "External Input overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto exin_over_get $(PORT)")
-}
-
-# Output
-record(bo, "$(P)$(R)ExOutPol-Sel"){
-  field(DESC, "External Output trigger polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto exout_pol_set $(PORT)")
-  field(FLNK, "$(P)$(R)ExOutPol-Sts")
-}
-
-record(bi, "$(P)$(R)ExOutPol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output trigger polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto exout_pol_get $(PORT)")
-}
-
-record(stringout, "$(P)$(R)ExOutStim-Sel"){
-  field(DESC, "External Output Stimulus selection")
-  field(FLNK, "$(P)$(R)ExOutStimCalc1")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 1")
-  field(INAA, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)ExOutStimCalc2")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 2")
-  field(INPA, "$(P)$(R)ExOutStimCalc1.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)ExOutStimCalc3")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 3")
-  field(INPA, "$(P)$(R)ExOutStimCalc2.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)ExOutStimCalc4")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 4")
-  field(INPA, "$(P)$(R)ExOutStimCalc3.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)ExOutStimCalc5")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 5")
-  field(INPA, "$(P)$(R)ExOutStimCalc4.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)ExOutStimCalc6")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 6")
-  field(INPA, "$(P)$(R)ExOutStimCalc5.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)ExOutStimCalc7")
-}
-
-record(scalcout, "$(P)$(R)ExOutStimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus calc 7")
-  field(INPA, "$(P)$(R)ExOutStimCalc6.VAL")
-  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)ExOutStimOut PP")
-}
-
-record(stringout, "$(P)$(R)ExOutStimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto exout_stim_set $(PORT)")
-  field(FLNK, "$(P)$(R)ExOutStim-Sts")
-}
-
-record(stringin, "$(P)$(R)ExOutStim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "External Output Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto exout_stim_get $(PORT)")
-}
-
+#########################################################################
+## External I/O
+## Desc: External trigger input and output.
+#
+## Input
+#record(bo, "$(P)$(R)ClearExInEv-Cmd"){
+#  field(DESC, "Clear External Input trigger event")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)ClearExInEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)ClearExInEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Clear External Input trigger event calc")
+#  field(INPA, "$(P)$(R)ClearExInEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto exin_clear_set $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)ExInEdge-Sel"){
+#  field(DESC, "External Input edge type")
+#  field(ZRST, "FALLING")
+#  field(ONST, "RISING")
+#  field(TWST, "EITHER")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto exin_edge_set $(PORT)")
+#  field(FLNK, "$(P)$(R)ExInEdge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)ExInEdge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Input edge type Sts")
+#  field(ZRST, "FALLING")
+#  field(ONST, "RISING")
+#  field(TWST, "EITHER")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto exin_edge_get $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)ExInOver-Mon"){
+#  field(DESC, "External Input overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto exin_over_get $(PORT)")
+#}
+#
+## Output
+#record(bo, "$(P)$(R)ExOutPol-Sel"){
+#  field(DESC, "External Output trigger polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto exout_pol_set $(PORT)")
+#  field(FLNK, "$(P)$(R)ExOutPol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)ExOutPol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output trigger polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto exout_pol_get $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)ExOutStim-Sel"){
+#  field(DESC, "External Output Stimulus selection")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 1")
+#  field(INAA, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 2")
+#  field(INPA, "$(P)$(R)ExOutStimCalc1.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 3")
+#  field(INPA, "$(P)$(R)ExOutStimCalc2.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 4")
+#  field(INPA, "$(P)$(R)ExOutStimCalc3.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 5")
+#  field(INPA, "$(P)$(R)ExOutStimCalc4.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 6")
+#  field(INPA, "$(P)$(R)ExOutStimCalc5.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)ExOutStimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)ExOutStimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus calc 7")
+#  field(INPA, "$(P)$(R)ExOutStimCalc6.VAL")
+#  field(INBB, "$(P)$(R)ExOutStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)ExOutStimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)ExOutStimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto exout_stim_set $(PORT)")
+#  field(FLNK, "$(P)$(R)ExOutStim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)ExOutStim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "External Output Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto exout_stim_get $(PORT)")
+#}
+#
 #########################################################################
 ## Digital I/O
 ## Desc: Digital I/O configuration. Simple output signals, and triggers.
