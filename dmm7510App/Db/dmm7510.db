@@ -1964,91 +1964,91 @@ record(longin, "$(P)$(R)MeasCnt-RB"){
   field(INP, "@dmm7510.proto meas_cnt_get $(PORT)")
 }
 
-record(stringout, "$(P)$(R)MeasStim-Sel"){
-  field(DESC, "Measurement Stimulus selection")
-  field(FLNK, "$(P)$(R)MeasStimCalc1")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 1")
-  field(INAA, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)MeasStimCalc2")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 2")
-  field(INPA, "$(P)$(R)MeasStimCalc1.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)MeasStimCalc3")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 3")
-  field(INPA, "$(P)$(R)MeasStimCalc2.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)MeasStimCalc4")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 4")
-  field(INPA, "$(P)$(R)MeasStimCalc3.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)MeasStimCalc5")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 5")
-  field(INPA, "$(P)$(R)MeasStimCalc4.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)MeasStimCalc6")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 6")
-  field(INPA, "$(P)$(R)MeasStimCalc5.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)MeasStimCalc7")
-}
-
-record(scalcout, "$(P)$(R)MeasStimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus calc 7")
-  field(INPA, "$(P)$(R)MeasStimCalc6.VAL")
-  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)MeasStimOut PP")
-}
-
-record(stringout, "$(P)$(R)MeasStimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto meas_stim_set $(PORT)")
-  field(FLNK, "$(P)$(R)MeasStim-Sts")
-}
-
-record(stringin, "$(P)$(R)MeasStim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Measurement Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto meas_stim_get $(PORT)")
-}
-
+#record(stringout, "$(P)$(R)MeasStim-Sel"){
+#  field(DESC, "Measurement Stimulus selection")
+#  field(FLNK, "$(P)$(R)MeasStimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 1")
+#  field(INAA, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)MeasStimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 2")
+#  field(INPA, "$(P)$(R)MeasStimCalc1.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)MeasStimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 3")
+#  field(INPA, "$(P)$(R)MeasStimCalc2.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)MeasStimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 4")
+#  field(INPA, "$(P)$(R)MeasStimCalc3.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)MeasStimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 5")
+#  field(INPA, "$(P)$(R)MeasStimCalc4.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)MeasStimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 6")
+#  field(INPA, "$(P)$(R)MeasStimCalc5.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)MeasStimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)MeasStimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus calc 7")
+#  field(INPA, "$(P)$(R)MeasStimCalc6.VAL")
+#  field(INBB, "$(P)$(R)MeasStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)MeasStimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)MeasStimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto meas_stim_set $(PORT)")
+#  field(FLNK, "$(P)$(R)MeasStim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)MeasStim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Measurement Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto meas_stim_get $(PORT)")
+#}
+#
 ########################################################################
 # Filter
 # Desc: Filter applied to measurement result.
@@ -2268,90 +2268,90 @@ record(longin, "$(P)$(R)DigtzeCnt-RB"){
   field(INP, "@dmm7510.proto digtz_cnt_get $(PORT)")
 }
 
-record(stringout, "$(P)$(R)DigtzeStim-Sel"){
-  field(DESC, "Digitize function stimulus selection")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc1")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 1")
-  field(INAA, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc2")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 2")
-  field(INPA, "$(P)$(R)DigtzeStimCalc1.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc3")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 3")
-  field(INPA, "$(P)$(R)DigtzeStimCalc2.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc4")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 4")
-  field(INPA, "$(P)$(R)DigtzeStimCalc3.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc5")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 5")
-  field(INPA, "$(P)$(R)DigtzeStimCalc4.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc6")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 6")
-  field(INPA, "$(P)$(R)DigtzeStimCalc5.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)DigtzeStimCalc7")
-}
-
-record(scalcout, "$(P)$(R)DigtzeStimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus calc 7")
-  field(INPA, "$(P)$(R)DigtzeStimCalc6.VAL")
-  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)DigtzeStimOut PP")
-}
-
-record(stringout, "$(P)$(R)DigtzeStimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digtz_stim_set $(PORT)")
-  field(FLNK, "$(P)$(R)DigtzeStim-Sts")
-}
-
-record(stringin, "$(P)$(R)DigtzeStim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digitize Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digtz_stim_get $(PORT)")
-}
+#record(stringout, "$(P)$(R)DigtzeStim-Sel"){
+#  field(DESC, "Digitize function stimulus selection")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 1")
+#  field(INAA, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 2")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc1.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 3")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc2.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 4")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc3.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 5")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc4.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 6")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc5.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)DigtzeStimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)DigtzeStimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus calc 7")
+#  field(INPA, "$(P)$(R)DigtzeStimCalc6.VAL")
+#  field(INBB, "$(P)$(R)DigtzeStim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)DigtzeStimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)DigtzeStimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digtz_stim_set $(PORT)")
+#  field(FLNK, "$(P)$(R)DigtzeStim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)DigtzeStim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digitize Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digtz_stim_get $(PORT)")
+#}
 
 record(bo, "$(P)$(R)DigtzeACFilter-Sel"){
   field(DESC, "Digitize AC coupling filter")
