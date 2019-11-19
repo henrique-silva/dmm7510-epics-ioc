@@ -153,1563 +153,1563 @@ record(stringin, "$(P)$(R)ExOutStim-Sts"){
   field(INP, "@dmm7510.proto exout_stim_get $(PORT)")
 }
 
+#########################################################################
+## Digital I/O
+## Desc: Digital I/O configuration. Simple output signals, and triggers.
+#
+## All lines must be configured as digital output
+#record(longout, "$(P)$(R)DigWrite-SP"){
+#  field(DESC, "Set all digital lines state as an int")
+#  field(DRVH, "63")
+#  field(DRVL, "0")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_writeall_set $(PORT)")
+#}
+#
+#record(longin, "$(P)$(R)DigRead-Mon"){
+#  field(DESC, "Read all digital lines state as an int")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_readall_get $(PORT)")
+#}
+#
+##################################################################
+## DIG1
+#
+#record(mbbo, "$(P)$(R)Dig1Mod-Sel"){
+#  field(DESC, "Digital line 1 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(1) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig1Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig1Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 1 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(1) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig1State-Sel"){
+#  field(DESC, "Digital line 1 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(1) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig1State-Mon"){
+#  field(DESC, "Digital line 1 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(1) $(PORT)")
+#}
+#
+## Command issued only when set to 1
+#record(bo, "$(P)$(R)Dig1ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 1")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig1ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig1ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 1")
+#  field(INPA, "$(P)$(R)Dig1ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(1) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig1Edge-Sel"){
+#  field(DESC, "Digital trigger input 1 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(1) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig1Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig1Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 1 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(1) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig1Over-Mon"){
+#  field(DESC, "Digital inp. 1 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(1) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig1Pol-Sel"){
+#  field(DESC, "Digital out. 1 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(1) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig1Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig1Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(1) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig1Width-SP"){
+#  field(DESC, "Digital out. 1 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(1) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig1Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig1Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 1 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(1) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig1Assert-Cmd"){
+#  field(DESC, "Digital out. 1 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig1AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig1AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig1Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(1) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig1Release-Cmd"){
+#  field(DESC, "Digital out. 1 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig1ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig1ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig1Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(1) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig1Stim-Sel"){
+#  field(DESC, "Digital out. 1 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig1StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig1StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig1StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig1StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig1StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig1StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig1StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig1StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig1StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig1StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 1 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(1) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig1Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig1Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 1 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(1) $(PORT)")
+#}
+#
+##################################################################
+## DIG2
+#
+#record(mbbo, "$(P)$(R)Dig2Mod-Sel"){
+#  field(DESC, "Digital line 2 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(2) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig2Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig2Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 2 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(2) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig2State-Sel"){
+#  field(DESC, "Digital line 2 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(2) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig2State-Mon"){
+#  field(DESC, "Digital line 2 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(2) $(PORT)")
+#}
+#
+## Command issued only when set to 2
+#record(bo, "$(P)$(R)Dig2ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 2")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig2ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig2ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 2")
+#  field(INPA, "$(P)$(R)Dig2ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(2) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig2Edge-Sel"){
+#  field(DESC, "Digital trigger input 2 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(2) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig2Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig2Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 2 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(2) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig2Over-Mon"){
+#  field(DESC, "Digital inp. 2 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(2) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig2Pol-Sel"){
+#  field(DESC, "Digital out. 2 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(2) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig2Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig2Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(2) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig2Width-SP"){
+#  field(DESC, "Digital out. 2 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(2) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig2Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig2Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 2 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(2) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig2Assert-Cmd"){
+#  field(DESC, "Digital out. 2 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig2AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig2AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig2Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(2) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig2Release-Cmd"){
+#  field(DESC, "Digital out. 2 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig2ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig2ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig2Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(2) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig2Stim-Sel"){
+#  field(DESC, "Digital out. 2 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig2StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig2StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig2StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig2StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig2StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig2StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig2StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig2StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig2StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig2StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 2 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(2) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig2Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig2Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 2 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(2) $(PORT)")
+#}
+#
+##################################################################
+## DIG3
+#
+#record(mbbo, "$(P)$(R)Dig3Mod-Sel"){
+#  field(DESC, "Digital line 3 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(3) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig3Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig3Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 3 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(3) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig3State-Sel"){
+#  field(DESC, "Digital line 3 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(3) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig3State-Mon"){
+#  field(DESC, "Digital line 3 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(3) $(PORT)")
+#}
+#
+## Command issued only when set to 3
+#record(bo, "$(P)$(R)Dig3ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 3")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig3ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig3ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 3")
+#  field(INPA, "$(P)$(R)Dig3ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(3) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig3Edge-Sel"){
+#  field(DESC, "Digital trigger input 3 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(3) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig3Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig3Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 3 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(3) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig3Over-Mon"){
+#  field(DESC, "Digital inp. 3 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(3) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig3Pol-Sel"){
+#  field(DESC, "Digital out. 3 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(3) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig3Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig3Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(3) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig3Width-SP"){
+#  field(DESC, "Digital out. 3 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(3) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig3Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig3Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 3 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(3) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig3Assert-Cmd"){
+#  field(DESC, "Digital out. 3 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig3AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig3AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig3Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(3) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig3Release-Cmd"){
+#  field(DESC, "Digital out. 3 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig3ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig3ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig3Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(3) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig3Stim-Sel"){
+#  field(DESC, "Digital out. 3 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig3StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig3StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig3StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig3StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig3StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig3StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig3StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig3StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig3StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig3StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 3 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(3) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig3Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig3Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 3 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(3) $(PORT)")
+#}
+#
+##################################################################
+## DIG4
+#
+#record(mbbo, "$(P)$(R)Dig4Mod-Sel"){
+#  field(DESC, "Digital line 4 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(4) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig4Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig4Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 4 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(4) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig4State-Sel"){
+#  field(DESC, "Digital line 4 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(4) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig4State-Mon"){
+#  field(DESC, "Digital line 4 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(4) $(PORT)")
+#}
+#
+## Command issued only when set to 4
+#record(bo, "$(P)$(R)Dig4ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 4")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig4ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig4ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 4")
+#  field(INPA, "$(P)$(R)Dig4ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(4) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig4Edge-Sel"){
+#  field(DESC, "Digital trigger input 4 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(4) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig4Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig4Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 4 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(4) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig4Over-Mon"){
+#  field(DESC, "Digital inp. 4 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(4) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig4Pol-Sel"){
+#  field(DESC, "Digital out. 4 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(4) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig4Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig4Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(4) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig4Width-SP"){
+#  field(DESC, "Digital out. 4 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(4) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig4Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig4Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 4 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(4) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig4Assert-Cmd"){
+#  field(DESC, "Digital out. 4 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig4AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig4AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig4Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(4) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig4Release-Cmd"){
+#  field(DESC, "Digital out. 4 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig4ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig4ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig4Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(4) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig4Stim-Sel"){
+#  field(DESC, "Digital out. 4 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig4StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig4StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig4StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig4StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig4StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig4StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig4StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig4StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig4StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig4StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 4 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(4) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig4Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig4Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 4 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(4) $(PORT)")
+#}
+#
+##################################################################
+## DIG5
+#
+#record(mbbo, "$(P)$(R)Dig5Mod-Sel"){
+#  field(DESC, "Digital line 5 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(5) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig5Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig5Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 5 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(5) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig5State-Sel"){
+#  field(DESC, "Digital line 5 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(5) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig5State-Mon"){
+#  field(DESC, "Digital line 5 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(5) $(PORT)")
+#}
+#
+## Command issued only when set to 5
+#record(bo, "$(P)$(R)Dig5ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 5")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig5ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig5ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 5")
+#  field(INPA, "$(P)$(R)Dig5ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(5) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig5Edge-Sel"){
+#  field(DESC, "Digital trigger input 5 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(5) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig5Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig5Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 5 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(5) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig5Over-Mon"){
+#  field(DESC, "Digital inp. 5 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(5) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig5Pol-Sel"){
+#  field(DESC, "Digital out. 5 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(5) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig5Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig5Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(5) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig5Width-SP"){
+#  field(DESC, "Digital out. 5 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(5) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig5Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig5Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 5 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(5) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig5Assert-Cmd"){
+#  field(DESC, "Digital out. 5 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig5AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig5AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig5Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(5) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig5Release-Cmd"){
+#  field(DESC, "Digital out. 5 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig5ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig5ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig5Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(5) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig5Stim-Sel"){
+#  field(DESC, "Digital out. 5 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig5StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig5StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig5StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig5StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig5StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig5StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig5StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig5StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig5StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig5StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 5 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(5) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig5Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig5Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 5 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(5) $(PORT)")
+#}
+#
+##################################################################
+## DIG6
+#
+#record(mbbo, "$(P)$(R)Dig6Mod-Sel"){
+#  field(DESC, "Digital line 6 mode")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_mode_set(6) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig6Mod-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig6Mod-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital line 6 mode Sts")
+#  field(ZRST, "DIGIN")
+#  field(ONST, "DIGOUT")
+#  field(TWST, "DIGOPEN")
+#  field(THST, "TRIGIN")
+#  field(FRST, "TRIGOUT")
+#  field(FVST, "TRIGOPEN")
+#  field(SXST, "SYNCMASTER")
+#  field(SVST, "SYNCACC")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_mode_get(6) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig6State-Sel"){
+#  field(DESC, "Digital line 6 state setting")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_state_set(6) $(PORT)")
+#}
+#
+## Process requested only by user or software
+#record(bi, "$(P)$(R)Dig6State-Mon"){
+#  field(DESC, "Digital line 6 state")
+#  field(ZNAM, "LOW")
+#  field(ONAM, "HIGH")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_state_get(6) $(PORT)")
+#}
+#
+## Command issued only when set to 6
+#record(bo, "$(P)$(R)Dig6ClrEv-Cmd"){
+#  field(DESC, "Clear trigger event on digital line 6")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig6ClrEvCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig6ClrEvCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Calc for clear trig event on dig line 6")
+#  field(INPA, "$(P)$(R)Dig6ClrEv-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_clrev_set(6) $(PORT)")
+#}
+#
+#record(mbbo, "$(P)$(R)Dig6Edge-Sel"){
+#  field(DESC, "Digital trigger input 6 edge")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_edge_set(6) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig6Edge-Sts")
+#}
+#
+#record(mbbi, "$(P)$(R)Dig6Edge-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital trigger input 6 edge Sts")
+#  field(ZRST, "Falling")
+#  field(ONST, "Rising")
+#  field(TWST, "Either")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_edge_get(6) $(PORT)")
+#}
+#
+#record(bi, "$(P)$(R)Dig6Over-Mon"){
+#  field(DESC, "Digital inp. 6 trig. overrun status")
+#  field(ZNAM, "No overrun")
+#  field(ONAM, "Overrun")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_over_get(6) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig6Pol-Sel"){
+#  field(DESC, "Digital out. 6 trig. polarity")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_pol_set(6) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig6Pol-Sts")
+#}
+#
+#record(bi, "$(P)$(R)Dig6Pol-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trig. polarity Sts")
+#  field(ZNAM, "Positive")
+#  field(ONAM, "Negative")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_pol_get(6) $(PORT)")
+#}
+#
+#record(ao, "$(P)$(R)Dig6Width-SP"){
+#  field(DESC, "Digital out. 6 trig. width")
+#  field(DRVH, "100000")
+#  field(DRVL, "0")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_width_set(6) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig6Width-RB")
+#}
+#
+#record(ai, "$(P)$(R)Dig6Width-RB"){
+#  field(ASG, "Reserved")
+#  field(PREC, "6")
+#  field(EGU, "seconds")
+#  field(DESC, "Digital out. 6 trig. width RB")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_width_get(6) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig6Assert-Cmd"){
+#  field(DESC, "Digital out. 6 trig. assert cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig6AssertCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig6AssertCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trig. assert calc")
+#  field(INPA, "$(P)$(R)Dig6Assert-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_assert_set(6) $(PORT)")
+#}
+#
+#record(bo, "$(P)$(R)Dig6Release-Cmd"){
+#  field(DESC, "Digital out. 6 trig. release cmd")
+#  field(ZNAM, "OFF")
+#  field(ONAM, "ON")
+#  field(HIGH, "0.5")
+#  field(FLNK, "$(P)$(R)Dig6ReleaseCalc")
+#}
+#
+#record(calcout, "$(P)$(R)Dig6ReleaseCalc"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trig. release calc")
+#  field(INPA, "$(P)$(R)Dig6Release-Cmd.VAL")
+#  field(CALC, "A")
+#  field(OOPT, "When Non-zero")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_release_set(6) $(PORT)")
+#}
+#
+#record(stringout, "$(P)$(R)Dig6Stim-Sel"){
+#  field(DESC, "Digital out. 6 trig. Stimulus selection")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc1")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc1"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 1")
+#  field(INAA, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc2")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc2"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 2")
+#  field(INPA, "$(P)$(R)Dig6StimCalc1.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc3")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc3"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 3")
+#  field(INPA, "$(P)$(R)Dig6StimCalc2.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc4")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc4"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 4")
+#  field(INPA, "$(P)$(R)Dig6StimCalc3.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc5")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc5"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 5")
+#  field(INPA, "$(P)$(R)Dig6StimCalc4.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc6")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc6"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 6")
+#  field(INPA, "$(P)$(R)Dig6StimCalc5.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
+#  field(FLNK, "$(P)$(R)Dig6StimCalc7")
+#}
+#
+#record(scalcout, "$(P)$(R)Dig6StimCalc7"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. calc 7")
+#  field(INPA, "$(P)$(R)Dig6StimCalc6.VAL")
+#  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
+#  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
+#  field(OCAL, "BB")
+#  field(DOPT, "Use OCAL")
+#  field(OOPT, "When Non-zero")
+#  field(OUT, "$(P)$(R)Dig6StimOut PP")
+#}
+#
+#record(stringout, "$(P)$(R)Dig6StimOut"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital out. 6 trigger Stim. to proto")
+#  field(DTYP, "stream")
+#  field(OUT, "@dmm7510.proto digio_stim_set(6) $(PORT)")
+#  field(FLNK, "$(P)$(R)Dig6Stim-Sts")
+#}
+#
+#record(stringin, "$(P)$(R)Dig6Stim-Sts"){
+#  field(ASG, "Reserved")
+#  field(DESC, "Digital output 6 trigger Stimulus Sts")
+#  field(DTYP, "stream")
+#  field(INP, "@dmm7510.proto digio_stim_get(6) $(PORT)")
+#}
+#
 ########################################################################
-# Digital I/O
-# Desc: Digital I/O configuration. Simple output signals, and triggers.
-
-# All lines must be configured as digital output
-record(longout, "$(P)$(R)DigWrite-SP"){
-  field(DESC, "Set all digital lines state as an int")
-  field(DRVH, "63")
-  field(DRVL, "0")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_writeall_set $(PORT)")
-}
-
-record(longin, "$(P)$(R)DigRead-Mon"){
-  field(DESC, "Read all digital lines state as an int")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_readall_get $(PORT)")
-}
-
-#################################################################
-# DIG1
-
-record(mbbo, "$(P)$(R)Dig1Mod-Sel"){
-  field(DESC, "Digital line 1 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(1) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig1Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig1Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 1 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(1) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig1State-Sel"){
-  field(DESC, "Digital line 1 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(1) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig1State-Mon"){
-  field(DESC, "Digital line 1 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(1) $(PORT)")
-}
-
-# Command issued only when set to 1
-record(bo, "$(P)$(R)Dig1ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 1")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig1ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig1ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 1")
-  field(INPA, "$(P)$(R)Dig1ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(1) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig1Edge-Sel"){
-  field(DESC, "Digital trigger input 1 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(1) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig1Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig1Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 1 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(1) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig1Over-Mon"){
-  field(DESC, "Digital inp. 1 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(1) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig1Pol-Sel"){
-  field(DESC, "Digital out. 1 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(1) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig1Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig1Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(1) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig1Width-SP"){
-  field(DESC, "Digital out. 1 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(1) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig1Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig1Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 1 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(1) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig1Assert-Cmd"){
-  field(DESC, "Digital out. 1 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig1AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig1AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig1Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(1) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig1Release-Cmd"){
-  field(DESC, "Digital out. 1 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig1ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig1ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trig. release calc")
-  field(INPA, "$(P)$(R)Dig1Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(1) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig1Stim-Sel"){
-  field(DESC, "Digital out. 1 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig1StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig1StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig1StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig1StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig1StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig1StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig1StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig1StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig1StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig1StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig1StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig1StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig1StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig1StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig1Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig1StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig1StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 1 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(1) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig1Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig1Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 1 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(1) $(PORT)")
-}
-
-#################################################################
-# DIG2
-
-record(mbbo, "$(P)$(R)Dig2Mod-Sel"){
-  field(DESC, "Digital line 2 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(2) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig2Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig2Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 2 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(2) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig2State-Sel"){
-  field(DESC, "Digital line 2 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(2) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig2State-Mon"){
-  field(DESC, "Digital line 2 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(2) $(PORT)")
-}
-
-# Command issued only when set to 2
-record(bo, "$(P)$(R)Dig2ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 2")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig2ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig2ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 2")
-  field(INPA, "$(P)$(R)Dig2ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(2) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig2Edge-Sel"){
-  field(DESC, "Digital trigger input 2 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(2) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig2Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig2Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 2 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(2) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig2Over-Mon"){
-  field(DESC, "Digital inp. 2 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(2) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig2Pol-Sel"){
-  field(DESC, "Digital out. 2 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(2) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig2Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig2Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(2) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig2Width-SP"){
-  field(DESC, "Digital out. 2 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(2) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig2Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig2Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 2 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(2) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig2Assert-Cmd"){
-  field(DESC, "Digital out. 2 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig2AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig2AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig2Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(2) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig2Release-Cmd"){
-  field(DESC, "Digital out. 2 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig2ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig2ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trig. release calc")
-  field(INPA, "$(P)$(R)Dig2Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(2) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig2Stim-Sel"){
-  field(DESC, "Digital out. 2 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig2StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig2StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig2StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig2StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig2StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig2StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig2StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig2StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig2StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig2StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig2StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig2StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig2StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig2StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig2Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig2StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig2StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 2 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(2) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig2Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig2Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 2 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(2) $(PORT)")
-}
-
-#################################################################
-# DIG3
-
-record(mbbo, "$(P)$(R)Dig3Mod-Sel"){
-  field(DESC, "Digital line 3 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(3) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig3Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig3Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 3 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(3) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig3State-Sel"){
-  field(DESC, "Digital line 3 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(3) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig3State-Mon"){
-  field(DESC, "Digital line 3 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(3) $(PORT)")
-}
-
-# Command issued only when set to 3
-record(bo, "$(P)$(R)Dig3ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 3")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig3ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig3ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 3")
-  field(INPA, "$(P)$(R)Dig3ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(3) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig3Edge-Sel"){
-  field(DESC, "Digital trigger input 3 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(3) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig3Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig3Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 3 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(3) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig3Over-Mon"){
-  field(DESC, "Digital inp. 3 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(3) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig3Pol-Sel"){
-  field(DESC, "Digital out. 3 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(3) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig3Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig3Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(3) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig3Width-SP"){
-  field(DESC, "Digital out. 3 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(3) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig3Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig3Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 3 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(3) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig3Assert-Cmd"){
-  field(DESC, "Digital out. 3 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig3AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig3AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig3Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(3) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig3Release-Cmd"){
-  field(DESC, "Digital out. 3 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig3ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig3ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trig. release calc")
-  field(INPA, "$(P)$(R)Dig3Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(3) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig3Stim-Sel"){
-  field(DESC, "Digital out. 3 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig3StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig3StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig3StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig3StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig3StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig3StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig3StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig3StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig3StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig3StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig3StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig3StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig3StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig3StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig3Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig3StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig3StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 3 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(3) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig3Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig3Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 3 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(3) $(PORT)")
-}
-
-#################################################################
-# DIG4
-
-record(mbbo, "$(P)$(R)Dig4Mod-Sel"){
-  field(DESC, "Digital line 4 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(4) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig4Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig4Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 4 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(4) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig4State-Sel"){
-  field(DESC, "Digital line 4 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(4) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig4State-Mon"){
-  field(DESC, "Digital line 4 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(4) $(PORT)")
-}
-
-# Command issued only when set to 4
-record(bo, "$(P)$(R)Dig4ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 4")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig4ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig4ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 4")
-  field(INPA, "$(P)$(R)Dig4ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(4) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig4Edge-Sel"){
-  field(DESC, "Digital trigger input 4 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(4) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig4Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig4Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 4 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(4) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig4Over-Mon"){
-  field(DESC, "Digital inp. 4 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(4) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig4Pol-Sel"){
-  field(DESC, "Digital out. 4 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(4) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig4Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig4Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(4) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig4Width-SP"){
-  field(DESC, "Digital out. 4 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(4) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig4Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig4Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 4 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(4) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig4Assert-Cmd"){
-  field(DESC, "Digital out. 4 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig4AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig4AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig4Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(4) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig4Release-Cmd"){
-  field(DESC, "Digital out. 4 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig4ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig4ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trig. release calc")
-  field(INPA, "$(P)$(R)Dig4Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(4) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig4Stim-Sel"){
-  field(DESC, "Digital out. 4 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig4StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig4StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig4StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig4StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig4StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig4StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig4StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig4StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig4StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig4StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig4StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig4StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig4StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig4StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig4Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig4StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig4StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 4 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(4) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig4Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig4Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 4 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(4) $(PORT)")
-}
-
-#################################################################
-# DIG5
-
-record(mbbo, "$(P)$(R)Dig5Mod-Sel"){
-  field(DESC, "Digital line 5 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(5) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig5Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig5Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 5 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(5) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig5State-Sel"){
-  field(DESC, "Digital line 5 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(5) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig5State-Mon"){
-  field(DESC, "Digital line 5 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(5) $(PORT)")
-}
-
-# Command issued only when set to 5
-record(bo, "$(P)$(R)Dig5ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 5")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig5ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig5ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 5")
-  field(INPA, "$(P)$(R)Dig5ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(5) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig5Edge-Sel"){
-  field(DESC, "Digital trigger input 5 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(5) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig5Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig5Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 5 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(5) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig5Over-Mon"){
-  field(DESC, "Digital inp. 5 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(5) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig5Pol-Sel"){
-  field(DESC, "Digital out. 5 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(5) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig5Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig5Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(5) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig5Width-SP"){
-  field(DESC, "Digital out. 5 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(5) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig5Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig5Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 5 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(5) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig5Assert-Cmd"){
-  field(DESC, "Digital out. 5 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig5AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig5AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig5Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(5) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig5Release-Cmd"){
-  field(DESC, "Digital out. 5 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig5ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig5ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trig. release calc")
-  field(INPA, "$(P)$(R)Dig5Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(5) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig5Stim-Sel"){
-  field(DESC, "Digital out. 5 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig5StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig5StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig5StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig5StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig5StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig5StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig5StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig5StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig5StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig5StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig5StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig5StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig5StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig5StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig5Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig5StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig5StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 5 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(5) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig5Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig5Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 5 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(5) $(PORT)")
-}
-
-#################################################################
-# DIG6
-
-record(mbbo, "$(P)$(R)Dig6Mod-Sel"){
-  field(DESC, "Digital line 6 mode")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_mode_set(6) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig6Mod-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig6Mod-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital line 6 mode Sts")
-  field(ZRST, "DIGIN")
-  field(ONST, "DIGOUT")
-  field(TWST, "DIGOPEN")
-  field(THST, "TRIGIN")
-  field(FRST, "TRIGOUT")
-  field(FVST, "TRIGOPEN")
-  field(SXST, "SYNCMASTER")
-  field(SVST, "SYNCACC")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_mode_get(6) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig6State-Sel"){
-  field(DESC, "Digital line 6 state setting")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_state_set(6) $(PORT)")
-}
-
-# Process requested only by user or software
-record(bi, "$(P)$(R)Dig6State-Mon"){
-  field(DESC, "Digital line 6 state")
-  field(ZNAM, "LOW")
-  field(ONAM, "HIGH")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_state_get(6) $(PORT)")
-}
-
-# Command issued only when set to 6
-record(bo, "$(P)$(R)Dig6ClrEv-Cmd"){
-  field(DESC, "Clear trigger event on digital line 6")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig6ClrEvCalc")
-}
-
-record(calcout, "$(P)$(R)Dig6ClrEvCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Calc for clear trig event on dig line 6")
-  field(INPA, "$(P)$(R)Dig6ClrEv-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_clrev_set(6) $(PORT)")
-}
-
-record(mbbo, "$(P)$(R)Dig6Edge-Sel"){
-  field(DESC, "Digital trigger input 6 edge")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_edge_set(6) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig6Edge-Sts")
-}
-
-record(mbbi, "$(P)$(R)Dig6Edge-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital trigger input 6 edge Sts")
-  field(ZRST, "Falling")
-  field(ONST, "Rising")
-  field(TWST, "Either")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_edge_get(6) $(PORT)")
-}
-
-record(bi, "$(P)$(R)Dig6Over-Mon"){
-  field(DESC, "Digital inp. 6 trig. overrun status")
-  field(ZNAM, "No overrun")
-  field(ONAM, "Overrun")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_over_get(6) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig6Pol-Sel"){
-  field(DESC, "Digital out. 6 trig. polarity")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_pol_set(6) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig6Pol-Sts")
-}
-
-record(bi, "$(P)$(R)Dig6Pol-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trig. polarity Sts")
-  field(ZNAM, "Positive")
-  field(ONAM, "Negative")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_pol_get(6) $(PORT)")
-}
-
-record(ao, "$(P)$(R)Dig6Width-SP"){
-  field(DESC, "Digital out. 6 trig. width")
-  field(DRVH, "100000")
-  field(DRVL, "0")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_width_set(6) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig6Width-RB")
-}
-
-record(ai, "$(P)$(R)Dig6Width-RB"){
-  field(ASG, "Reserved")
-  field(PREC, "6")
-  field(EGU, "seconds")
-  field(DESC, "Digital out. 6 trig. width RB")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_width_get(6) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig6Assert-Cmd"){
-  field(DESC, "Digital out. 6 trig. assert cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig6AssertCalc")
-}
-
-record(calcout, "$(P)$(R)Dig6AssertCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trig. assert calc")
-  field(INPA, "$(P)$(R)Dig6Assert-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_assert_set(6) $(PORT)")
-}
-
-record(bo, "$(P)$(R)Dig6Release-Cmd"){
-  field(DESC, "Digital out. 6 trig. release cmd")
-  field(ZNAM, "OFF")
-  field(ONAM, "ON")
-  field(HIGH, "0.5")
-  field(FLNK, "$(P)$(R)Dig6ReleaseCalc")
-}
-
-record(calcout, "$(P)$(R)Dig6ReleaseCalc"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trig. release calc")
-  field(INPA, "$(P)$(R)Dig6Release-Cmd.VAL")
-  field(CALC, "A")
-  field(OOPT, "When Non-zero")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_release_set(6) $(PORT)")
-}
-
-record(stringout, "$(P)$(R)Dig6Stim-Sel"){
-  field(DESC, "Digital out. 6 trig. Stimulus selection")
-  field(FLNK, "$(P)$(R)Dig6StimCalc1")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc1"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 1")
-  field(INAA, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "AA=='NONE'||AA=='DISPLAY'||AA=='COMMAND'||AA=='ANALOGTRIGGER'||AA=='EXTERNAL'")
-  field(FLNK, "$(P)$(R)Dig6StimCalc2")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc2"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 2")
-  field(INPA, "$(P)$(R)Dig6StimCalc1.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=7&&BB[0,5]=='NOTIFY'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig6StimCalc3")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc3"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 3")
-  field(INPA, "$(P)$(R)Dig6StimCalc2.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=4&&BB[0,2]=='LAN'&&int(BB)>0&&int(BB)<9)")
-  field(FLNK, "$(P)$(R)Dig6StimCalc4")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc4"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 4")
-  field(INPA, "$(P)$(R)Dig6StimCalc3.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='DIGIO'&&int(BB)>0&&int(BB)<7)")
-  field(FLNK, "$(P)$(R)Dig6StimCalc5")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc5"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 5")
-  field(INPA, "$(P)$(R)Dig6StimCalc4.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=6&&BB[0,4]=='TIMER'&&int(BB)>0&&int(BB)<5)")
-  field(FLNK, "$(P)$(R)Dig6StimCalc6")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc6"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 6")
-  field(INPA, "$(P)$(R)Dig6StimCalc5.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='BLENDER'&&int(BB)>0&&int(BB)<3)")
-  field(FLNK, "$(P)$(R)Dig6StimCalc7")
-}
-
-record(scalcout, "$(P)$(R)Dig6StimCalc7"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. calc 7")
-  field(INPA, "$(P)$(R)Dig6StimCalc6.VAL")
-  field(INBB, "$(P)$(R)Dig6Stim-Sel.VAL")
-  field(CALC, "A||(len(BB)=8&&BB[0,6]=='TSPLINK'&&int(BB)>0&&int(BB)<4)")
-  field(OCAL, "BB")
-  field(DOPT, "Use OCAL")
-  field(OOPT, "When Non-zero")
-  field(OUT, "$(P)$(R)Dig6StimOut PP")
-}
-
-record(stringout, "$(P)$(R)Dig6StimOut"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital out. 6 trigger Stim. to proto")
-  field(DTYP, "stream")
-  field(OUT, "@dmm7510.proto digio_stim_set(6) $(PORT)")
-  field(FLNK, "$(P)$(R)Dig6Stim-Sts")
-}
-
-record(stringin, "$(P)$(R)Dig6Stim-Sts"){
-  field(ASG, "Reserved")
-  field(DESC, "Digital output 6 trigger Stimulus Sts")
-  field(DTYP, "stream")
-  field(INP, "@dmm7510.proto digio_stim_get(6) $(PORT)")
-}
-
-########################################################################
-# Function selection
+## Function selection
 # Desc: Measurement and digitize functions options
 
 record(mbbo, "$(P)$(R)MeasFnc-Sel"){
